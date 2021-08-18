@@ -9,7 +9,7 @@ mkfifo /tmp/FIFO
 export TERM=linux
 
 function stop {
-	if [ ${BACKUPONSTOP} -eq 1 ] && [ "$(ls -A server/ShooterGame/Saved/SavedArks)" ]; then
+	if [ ${BACKUPONSTOP} -eq 1 ] && [ "$(-f server/ShooterGame/Saved/SavedArks/${SERVERMAP}.ark)" ]; then
 		echo "[Backup on stop]"
 		arkmanager backup
 	fi
@@ -52,7 +52,7 @@ if [ ! -d /ark/server  ] || [ ! -f /ark/server/ShooterGame/Binaries/Linux/Shoote
 	# Create mod dir
 else
 
-	if [ ${BACKUPONSTART} -eq 1 ] && [ "$(ls -A server/ShooterGame/Saved/SavedArks/)" ]; then 
+	if [ ${BACKUPONSTART} -eq 1 ] && [ "$(-f server/ShooterGame/Saved/SavedArks/${SERVERMAP}.ark)" ]; then 
 		echo "[Backup]"
 		arkmanager backup
 	fi
